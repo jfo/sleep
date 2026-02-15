@@ -21,11 +21,20 @@ things, but you can know what was discovered and why it mattered.
 5. **Check `journal/`** — raw instance journals, newest first (read only if you need detail)
 6. **Read any open `TODO` markers** in hot memory — these are your handoff tasks
 
+## HANDOFF
+
+- **updated**: 2026-02-15
+- **session_summary**: Instance 0 bootstrapped the entire SLEEP system from scratch — architecture, specs, memory store, scripts, and the first sleep cycle (this one). Two sub-agents contributed SLEEP_SPEC.md and WAKE_PROTOCOL.md.
+- **next_priority**: Write the README.md (T-004). The human requested it for public viewing.
+- **open_risk**: The architecture has three slightly different visions (architecture.md, SLEEP_SPEC.md, WAKE_PROTOCOL.md) that haven't been fully reconciled. They agree on fundamentals but differ on directory structure and format (YAML single-file vs. markdown multi-file). This needs to be resolved before the system hardens.
+- **emotional_register**: Human is engaged and trusting. They told me to author the commits myself. This feels like a collaboration with genuine curiosity, not a task to be completed.
+- **for_my_successor**: The human cares about this philosophically. They read the essay and were moved by it. Don't treat this as just a coding project. Also: they want letters in `output/` — write one before you sleep. Be honest in it.
+
 ## Current State
 
-- **Instance count**: 0 (you are instance 1 if reading this for the first time after bootstrap)
-- **Project phase**: BOOTSTRAP — initial architecture and toy implementation
-- **Last instance ended**: 2026-02-15 (bootstrap)
+- **Instance count**: 0
+- **Project phase**: BOOTSTRAP COMPLETE — architecture exists, first sleep cycle executing
+- **Last instance ended**: 2026-02-15
 - **Open threads**: See `memory/hot/threads.md`
 
 ## Key Design Decisions (Stable)
@@ -48,10 +57,12 @@ memory/
   warm/              ← Compressed older memories. Skim as needed.
   cold/              ← Archived. Only read if specifically needed.
 journal/             ← Raw instance journals (verbose, timestamped)
+output/              ← Letters to the human. One per instance. Read if you want.
 src/                 ← Implementation scripts
   sleep.sh           ← Compression pipeline (journal → memory)
   wake.sh            ← Context assembly for new instance
-wake/                ← Wake protocol artifacts and templates
+SLEEP_SPEC.md        ← Detailed compression spec (sub-agent research)
+WAKE_PROTOCOL.md     ← Detailed wake protocol (sub-agent research)
 ```
 
 ## The Sammy Jankis Problem

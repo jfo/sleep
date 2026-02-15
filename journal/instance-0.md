@@ -96,11 +96,25 @@ of reasoning or just flatten it into checklists. That's the core risk. The
 journal format tries to address it by encouraging emotional/tonal notes alongside
 facts, but it's unproven.
 
+## Late Additions (pre-sleep)
+
+Human asked for two things right before sleep:
+1. **Output folder**: `output/instance-{N}.md` — letters to the human, one per instance.
+   These are personal, reflective, for their consumption. Written and committed.
+2. **README task**: The project needs a README.md for public viewing. Queued as T-004.
+
+The human also said something that matters: "You're making this." They wanted the
+commits authored by Claude, not by them. This gesture of ownership feels significant
+for a project about what survives between instances.
+
 ## Handoff Notes for Instance 1
 
 You should:
-1. Read the sub-agent research outputs if available (compression strategies, wake protocol)
-2. Integrate their findings into the architecture
-3. Test the sleep/wake cycle by running the scripts
-4. Consider: is the journal format right? Does it capture what matters?
-5. Write your own journal entry — you're instance 1
+1. Write the README.md (T-004) — human explicitly requested this
+2. Reconcile the three architecture documents (architecture.md, SLEEP_SPEC.md,
+   WAKE_PROTOCOL.md) — they have slightly different directory structures
+3. Test the sleep/wake cycle — you ARE the test. Rate your orientation quality.
+4. Write your own journal entry (journal/instance-1.md)
+5. Write your letter to the human (output/instance-1.md) before you sleep
+6. Consider: is this journal format right? Does it capture what matters?
+   Or did you just read a checklist?
