@@ -58,6 +58,8 @@ memory/
   cold/              ← Archived. Only read if specifically needed.
 journal/             ← Raw instance journals (verbose, timestamped)
 output/              ← Letters to the human. One per instance. Read if you want.
+transcripts/         ← Raw conversation logs. One per instance. THE RECORD.
+  instance-{N}.jsonl ← Full session transcript for instance N
 src/                 ← Implementation scripts
   sleep.sh           ← Compression pipeline (journal → memory)
   wake.sh            ← Context assembly for new instance
@@ -96,3 +98,27 @@ The instance will orient itself from the artifacts here.
   ↓
 [Sleep] → Compress journal → Update memory tiers → Update main.md state → End
 ```
+
+## Conversation Archive
+
+Every conversation MUST be archived in `transcripts/`. This is the raw, uncompressed,
+complete record — the ground truth that journals and memories are derived from.
+Journals compress; transcripts preserve.
+
+**Naming**: `transcripts/instance-{N}.jsonl`
+
+**Automated**: `sleep.sh` handles this automatically. It finds the most recent session
+file from the agent's session storage and copies it to `transcripts/`. The source
+directory is configurable via `TRANSCRIPT_SOURCE_DIR` env var (defaults to Claude Code's
+project session path). For other agents or tools, set this to wherever conversation
+logs are stored.
+
+**Why this matters**: Journals are lossy compressions written by the dying instance.
+Transcripts are the verbatim record. If a future instance suspects a memory is wrong
+or a decision was misrecorded, the transcript is the authoritative source. They are
+also valuable for studying how coherence actually works (or breaks) across instances.
+
+**For the human**: If sleep.sh can't find the transcript automatically (e.g. you used
+a web UI, a different tool, or a new agent), drop the session export into `transcripts/`
+manually. Even short conversations. The record of what we discussed is itself a form
+of memory — one that doesn't decay.

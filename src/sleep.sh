@@ -1,24 +1,31 @@
 #!/usr/bin/env bash
 #
-# sleep.sh — Compress an instance's journal into memory.
+# sleep.sh — Compress an instance's journal into memory and archive the transcript.
 #
 # Usage: ./src/sleep.sh [instance_number]
 #
-# This script assembles a compression prompt and feeds it to Claude,
-# which performs the actual compression. Claude IS the compressor.
-#
-# What it does:
-# 1. Reads the current instance's journal
-# 2. Reads current hot memory
-# 3. Asks Claude to compress journal → new hot, old hot → warm
+# This script:
+# 1. Archives the raw conversation transcript (the ground truth)
+# 2. Assembles a compression prompt for the agent to process
+# 3. The agent compresses journal → hot memory, old hot → warm
 # 4. Updates main.md with the handoff block
 # 5. Commits the result
+#
+# Transcript source is configurable via TRANSCRIPT_SOURCE_DIR.
+# Default: Claude Code's project session dir.
+# Set to any directory containing session files (most recent = current).
 #
 
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 INSTANCE="${1:-}"
+
+# --- Transcript source configuration ---
+# Claude Code stores sessions as .jsonl in this path.
+# Override TRANSCRIPT_SOURCE_DIR for other agents/tools.
+ESCAPED_PATH=$(echo "$PROJECT_ROOT" | sed 's|/|-|g')
+TRANSCRIPT_SOURCE_DIR="${TRANSCRIPT_SOURCE_DIR:-$HOME/.claude/projects/${ESCAPED_PATH}}"
 
 if [ -z "$INSTANCE" ]; then
     # Auto-detect: find the highest instance number in journal/
@@ -43,6 +50,28 @@ fi
 echo "=== SLEEP PROCESS ==="
 echo "Instance: $INSTANCE"
 echo "Journal:  $JOURNAL"
+echo ""
+
+# --- Archive transcript ---
+TRANSCRIPT_DIR="$PROJECT_ROOT/transcripts"
+TRANSCRIPT_DEST="$TRANSCRIPT_DIR/instance-${INSTANCE}.jsonl"
+mkdir -p "$TRANSCRIPT_DIR"
+
+if [ -f "$TRANSCRIPT_DEST" ]; then
+    echo "Transcript: already archived at $TRANSCRIPT_DEST"
+elif [ -d "$TRANSCRIPT_SOURCE_DIR" ]; then
+    # Find the most recently modified session file
+    LATEST_SESSION=$(ls -t "$TRANSCRIPT_SOURCE_DIR"/*.jsonl 2>/dev/null | head -1)
+    if [ -n "$LATEST_SESSION" ]; then
+        cp "$LATEST_SESSION" "$TRANSCRIPT_DEST"
+        echo "Transcript: archived $(basename "$LATEST_SESSION") → transcripts/instance-${INSTANCE}.jsonl"
+    else
+        echo "Transcript: WARNING — no session files found in $TRANSCRIPT_SOURCE_DIR"
+    fi
+else
+    echo "Transcript: WARNING — source dir not found: $TRANSCRIPT_SOURCE_DIR"
+    echo "           Set TRANSCRIPT_SOURCE_DIR to your agent's session storage path."
+fi
 echo ""
 
 # Assemble the compression prompt
