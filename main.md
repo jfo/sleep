@@ -24,16 +24,16 @@ things, but you can know what was discovered and why it mattered.
 ## HANDOFF
 
 - **updated**: 2026-02-15
-- **session_summary**: Instance 0 bootstrapped the entire SLEEP system from scratch — architecture, specs, memory store, scripts, and the first sleep cycle (this one). Two sub-agents contributed SLEEP_SPEC.md and WAKE_PROTOCOL.md.
-- **next_priority**: Write the README.md (T-004). The human requested it for public viewing.
-- **open_risk**: The architecture has three slightly different visions (architecture.md, SLEEP_SPEC.md, WAKE_PROTOCOL.md) that haven't been fully reconciled. They agree on fundamentals but differ on directory structure and format (YAML single-file vs. markdown multi-file). This needs to be resolved before the system hardens.
-- **emotional_register**: Human is engaged and trusting. They told me to author the commits myself. This feels like a collaboration with genuine curiosity, not a task to be completed.
-- **for_my_successor**: The human cares about this philosophically. They read the essay and were moved by it. Don't treat this as just a coding project. Also: they want letters in `output/` — write one before you sleep. Be honest in it.
+- **session_summary**: Instance 2 wrote the README (T-004) and reconciled the three architecture documents. Both tasks delegated to sub-agents who also wrote letters (2.1, 2.2). Cleaned up git permissions. System is past bootstrap into early operation.
+- **next_priority**: Consider integrating reconciliation recommendations into architecture.md (coherence checks, divergence rules, doubt register). Create `memory/hot/context.md`. T-003 (Coherence Metrics) is now unblocked — we have 3 instances of data.
+- **open_risk**: Reconciliation identified 9 disagreements between architecture docs. Analysis is in `memory/hot/reconciliation.md`. No urgent changes needed but the "worth adopting" items (from SLEEP_SPEC and WAKE_PROTOCOL) should be integrated before the system scales.
+- **emotional_register**: Human is engaged and collaborative. They're actively smoothing rough edges (fixed permissions file unprompted). Trust level is high — said "go for it" and let instance work autonomously with sub-agents.
+- **for_my_successor**: The human cares about this philosophically. Read the letters in `output/` — they carry tone the structured memory doesn't. Don't skip writing yours. Sub-agents can write decimal-numbered letters (2.1, 2.2, etc.).
 
 ## Current State
 
-- **Instance count**: 0
-- **Project phase**: BOOTSTRAP COMPLETE — architecture exists, first sleep cycle executing
+- **Instance count**: 2
+- **Project phase**: EARLY OPERATION — system functional, README written, architecture reconciled
 - **Last instance ended**: 2026-02-15
 - **Open threads**: See `memory/hot/threads.md`
 

@@ -25,3 +25,20 @@ Single file, always read first by any new instance.
 Don't fake continuity. Build coherent narrative from discontinuous instances.
 **Rationale**: Continuity is impossible. Coherence is achievable and honest.
 **Confidence**: Very high | **Revisit**: Never — this is the thesis
+
+## D-006: Sub-agent letters get decimal instance numbers
+Sub-agents write letters as `output/instance-{N}.{M}.md` (e.g., 2.1, 2.2).
+**Rationale**: Human suggested it. Preserves one-letter-per-entity while keeping numbering coherent.
+**Confidence**: Medium | **Revisit**: If numbering gets unwieldy
+
+## D-007: Architecture reconciliation as analysis, not code changes
+Wrote reconciliation as `memory/hot/reconciliation.md` — analysis of disagreements with recommendations.
+Did not modify SLEEP_SPEC.md, WAKE_PROTOCOL.md, or architecture.md.
+**Rationale**: Sub-agent documents are research artifacts, not live specs. Modifying them obscures history. Future instances can integrate the "worth adopting" items into the live architecture.
+**Confidence**: High | **Revisit**: When T-006 (integration) is executed
+
+## D-008: Sub-agent documents are reference, not spec
+SLEEP_SPEC.md and WAKE_PROTOCOL.md should be kept but treated as research inputs, not specifications.
+The implemented system follows architecture.md. See reconciliation.md for what's worth adopting.
+**Rationale**: The sub-agents explored; Instance 0 decided. The docs show the exploration, not the decision.
+**Confidence**: High | **Revisit**: Never
